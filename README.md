@@ -5,7 +5,7 @@ Prerequisite:
 
 2) Editor:
    # any preferred editor.
-   # Sublimetext3 is used for this project because of the packages available for verilog and system verilog.
+   # vim is used for this project.
 3) Simulation and synthesis tool :
    # Icarus: https://bleyer.org/icarus (opensource)
    # gtkwave: https://gtkwave.sourceforge.net 
