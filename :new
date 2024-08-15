@@ -1,0 +1,48 @@
+#!/bin/tcsh -f
+
+cd `dirname $0`
+
+echo "#############"
+echo " Run directory "
+echo $cwd
+echo "#############"
+
+set module=$1
+if ($module == "") then
+  echo "Provide the module name"
+  set module="NA"
+  while ( $module == "NA" ) 
+    echo -n "module name: "
+    set module=$<
+  end
+endif
+
+cp -rf test $module
+
+## Design File
+touch ./$module/0_design/$module\.v
+# sed -i "1s/.*/module $1 ( \n   \/\/inputs \n \/\/ outputs \n ); \n endmodule/" ./tt
+echo "module $module ( \
+  // inputs \n \
+  // outputs \n \
+  ); \n \
+endmodule " > ./$module/0_design/$module\.v
+
+## TB file
+touch ./$module/1_tb/$module\_tb\.v
+echo -e 'module '${module}'_tb ; \
+  /* wires */ \n \
+  /* reg */ \n \
+  '${module}' DUT (/* Port connections */ ); \n \
+  initial begin \
+  $display("Simulation started"); \
+  $dumpfile("./2_sim/'${1}'.vcd"); \
+  $dumpvars(0, '${module}'_tb); \n \n \n \n \
+  $display("Simulation finished"); \
+  #1000 $finish; \
+  end \
+endmodule' > ./$module/1_tb/$module\_tb\.v
+
+  
+echo "created $module"
+exit
