@@ -1,5 +1,10 @@
 #RTL2GDS
 A detailed description from RTL to GDS with 100 days of RTL as base point.
+
+:new 
+1) use this file to create the basic module shell.
+2) usage: :new <\module_name\>
+
 Prerequisite:
 1) Digital Design concepts.
 
