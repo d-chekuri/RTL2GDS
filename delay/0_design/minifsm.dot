@@ -1,0 +1,13 @@
+digraph "d_ff" {
+rankdir="LR";
+remincross=true;
+n1 [ shape=octagon, label="clk", color="black", fontcolor="black" ];
+n2 [ shape=octagon, label="d", color="black", fontcolor="black" ];
+n3 [ shape=octagon, label="q", color="black", fontcolor="black" ];
+n4 [ shape=octagon, label="reset", color="black", fontcolor="black" ];
+c9 [ shape=record, label="{{<p5> CLK|<p6> D|<p7> SRST}|$6\n$sdff|{<p8> Q}}",  ];
+n1:e -> c9:p5:w [colorscheme="dark28", color="8", fontcolor="8", label=""];
+n2:e -> c9:p6:w [colorscheme="dark28", color="4", fontcolor="4", label=""];
+c9:p8:e -> n3:w [colorscheme="dark28", color="6", fontcolor="6", label=""];
+n4:e -> c9:p7:w [colorscheme="dark28", color="5", fontcolor="5", label=""];
+}

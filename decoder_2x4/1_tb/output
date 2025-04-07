@@ -1,0 +1,88 @@
+#! /usr/local/bin/vvp
+:ivl_version "13.0 (devel)" "(s20221226-328-ga9ef00676)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+S_0xc41140 .scope module, "decoder_2x4_tb" "decoder_2x4_tb" 2 2;
+ .timescale -9 -9;
+v0xc57de0_0 .var "En", 0 0;
+v0xc57ea0_0 .var "I1", 0 0;
+v0xc57f70_0 .var "I2", 0 0;
+v0xc58070_0 .net "O", 3 0, L_0xc588f0;  1 drivers
+S_0xc412d0 .scope module, "DUT" "decoder_2x4" 2 10, 3 1 0, S_0xc41140;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "I1";
+    .port_info 1 /INPUT 1 "I2";
+    .port_info 2 /INPUT 1 "En";
+    .port_info 3 /OUTPUT 4 "O";
+L_0xc58140 .functor AND 1, v0xc57ea0_0, v0xc57f70_0, C4<1>, C4<1>;
+L_0xc58230 .functor NOT 1, v0xc57ea0_0, C4<0>, C4<0>, C4<0>;
+L_0xc582a0 .functor AND 1, v0xc57f70_0, L_0xc58230, C4<1>, C4<1>;
+L_0xc58360 .functor NOT 1, v0xc57f70_0, C4<0>, C4<0>, C4<0>;
+L_0xc58490 .functor AND 1, L_0xc58360, v0xc57ea0_0, C4<1>, C4<1>;
+L_0xc585c0 .functor OR 1, v0xc57f70_0, v0xc57ea0_0, C4<0>, C4<0>;
+L_0xc58670 .functor NOT 1, L_0xc585c0, C4<0>, C4<0>, C4<0>;
+v0xc414b0_0 .net "En", 0 0, v0xc57de0_0;  1 drivers
+v0xc57260_0 .net "I1", 0 0, v0xc57ea0_0;  1 drivers
+v0xc57320_0 .net "I2", 0 0, v0xc57f70_0;  1 drivers
+v0xc573c0_0 .net "O", 3 0, L_0xc588f0;  alias, 1 drivers
+v0xc574a0_0 .net *"_ivl_0", 0 0, L_0xc58140;  1 drivers
+v0xc575d0_0 .net *"_ivl_10", 0 0, L_0xc585c0;  1 drivers
+v0xc576b0_0 .net *"_ivl_12", 0 0, L_0xc58670;  1 drivers
+v0xc57790_0 .net *"_ivl_14", 3 0, L_0xc586e0;  1 drivers
+L_0x7f088893c018 .functor BUFT 1, C4<0000>, C4<0>, C4<0>, C4<0>;
+v0xc57870_0 .net/2u *"_ivl_16", 3 0, L_0x7f088893c018;  1 drivers
+v0xc579e0_0 .net *"_ivl_2", 0 0, L_0xc58230;  1 drivers
+v0xc57ac0_0 .net *"_ivl_4", 0 0, L_0xc582a0;  1 drivers
+v0xc57ba0_0 .net *"_ivl_6", 0 0, L_0xc58360;  1 drivers
+v0xc57c80_0 .net *"_ivl_8", 0 0, L_0xc58490;  1 drivers
+L_0xc586e0 .concat [ 1 1 1 1], L_0xc58670, L_0xc58490, L_0xc582a0, L_0xc58140;
+L_0xc588f0 .functor MUXZ 4, L_0x7f088893c018, L_0xc586e0, v0xc57de0_0, C4<>;
+    .scope S_0xc41140;
+T_0 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0xc57de0_0, 0, 1;
+    %delay 1, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0xc57de0_0, 0, 1;
+    %vpi_call 2 20 "$monitor", "I2I1 --> %b%b : O --> %b", v0xc57f70_0, v0xc57ea0_0, v0xc58070_0 {0 0 0};
+    %pushi/vec4 5, 0, 32;
+T_0.0 %dup/vec4;
+    %pushi/vec4 0, 0, 32;
+    %cmp/s;
+    %jmp/1xz T_0.1, 5;
+    %jmp/1 T_0.1, 4;
+    %pushi/vec4 1, 0, 32;
+    %sub;
+    %vpi_func 2 22 "$random" 32 {0 0 0};
+    %pad/s 1;
+    %store/vec4 v0xc57f70_0, 0, 1;
+    %delay 1, 0;
+    %vpi_func 2 23 "$random" 32 {0 0 0};
+    %pad/s 1;
+    %store/vec4 v0xc57ea0_0, 0, 1;
+    %jmp T_0.0;
+T_0.1 ;
+    %pop/vec4 1;
+    %delay 100, 0;
+    %vpi_call 2 25 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0xc41140;
+T_1 ;
+    %vpi_call 2 28 "$display", "Simulation started" {0 0 0};
+    %vpi_call 2 29 "$dumpfile", "./2_sim/decoder_2x4.vcd" {0 0 0};
+    %vpi_call 2 30 "$dumpvars", 32'sb00000000000000000000000000000000, S_0xc41140 {0 0 0};
+    %vpi_call 2 31 "$display", "Simulation finished" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "./1_tb/decoder_2x4_tb.v";
+    "./0_design/decoder_2x4.v";

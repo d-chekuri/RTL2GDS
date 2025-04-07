@@ -33,8 +33,7 @@ module d_ff_tb ;
   clk = 0;
   reset = 1;    
  
-  #5;
-  reset = 0;  
+  reset = #5 1'b0;  
   d = 1;      
   #5;
   d = 0;      

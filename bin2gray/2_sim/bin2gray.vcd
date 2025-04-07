@@ -1,0 +1,55 @@
+$date
+	Thu Dec  5 18:40:39 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module bin2gray_tb $end
+$var wire 4 ! gray [3:0] $end
+$var parameter 4 " WIDTH $end
+$var reg 4 # bin [3:0] $end
+$scope module DUT $end
+$var wire 4 $ bin [3:0] $end
+$var wire 4 % gray [3:0] $end
+$var parameter 4 & WIDTH $end
+$scope begin genblk1[0] $end
+$var parameter 2 ' i $end
+$upscope $end
+$scope begin genblk1[1] $end
+$var parameter 2 ( i $end
+$upscope $end
+$scope begin genblk1[2] $end
+$var parameter 3 ) i $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10 )
+b1 (
+b0 '
+b100 &
+b100 "
+$end
+#0
+$dumpvars
+bx %
+bx $
+bx #
+bx !
+$end
+#1
+b1010 !
+b1010 %
+b1100 #
+b1100 $
+#2
+b11 !
+b11 %
+b10 #
+b10 $
+#102

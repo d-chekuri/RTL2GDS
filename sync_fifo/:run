@@ -1,0 +1,5 @@
+#!/bin/tcsh -f
+
+iverilog -o ./1_tb/output ./1_tb/$1_tb.v ./0_design/$1.v && vvp ./1_tb/output
+
+exit

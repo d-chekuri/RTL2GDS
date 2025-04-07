@@ -1,0 +1,16 @@
+#!/bin/tcsh -f
+
+setenv design "`basename $cwd`"
+
+if (-e ./2_sim/$design.vcd) then
+rm -rf ./2_sim/$design.vcd
+endif
+
+find . -type f -name "*.v" -exec echo {} > filelist.f \;
+
+iverilog -o ./1_tb/output -f filelist.f && vvp ./1_tb/output
+
+if (-e ./2_sim/$design.vcd) then
+gtkwave ./2_sim/$design.vcd &
+endif
+exit
